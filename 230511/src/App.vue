@@ -25,11 +25,17 @@
   <img :src="원룸들[0].image" class="room-img"/>
   <h4> {{원룸들[0].title}}</h4>
   <p> {{원룸들[0].price}}원 </p>
- <button @click="신고수[0]++">허위매물신고</button> <span>신고수 : {{신고수[0]}} </span>
+  <button @click="신고수[0]++">허위매물신고</button> <span>신고수 : {{신고수[0]}} </span>
   </div>
 
 
-  <div v-for="(방들, i) in 원룸들" :key="i">{{방들[i]}}</div>
+  <div v-for="(방들, i) in 원룸들" :key="i">
+    <img :src="원룸들[i].image">
+    <p>{{원룸들[i].title}}</p>
+    <p>{{원룸들[i].price}}</p>
+    <p>{{원룸들[i].content}}</p>
+
+  </div>
 
 
   <div>
