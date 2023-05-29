@@ -18,13 +18,10 @@
 <!--  <p> 특징 : {{원룸들[0].content}}</p>-->
 <!--  <button @click="신고수[0]++">허위매물신고</button> <span> 신고수: {{ 신고수[0]}}  </span>-->
 <!--</div>-->
+  <RoomCard :원룸들="원룸들" />
+  
 
-  <div v-for="(room, i) in 원룸들" :key="i">
-    <img :src="room.image" class="room-img">
-    <h4 @click="모달창열렸니 = true; 누른거 = i"> 집이름: {{room.title}}</h4>
-    <p> 가격 : {{room.price}}원 </p>
-    <p> 특징 : {{room.content}}</p>
-  </div>
+
 <!--<div>-->
 <!--  <img src="./assets/room1.jpg" class="room-img">-->
 <!--  <h4> {{products[1]}} </h4>-->
@@ -44,6 +41,8 @@
 import data from './assets/oneroom';
 import DiscountBanner from "../src/DiscountBanner.vue";
 import ModalPage from "../src/ModalPage.vue";
+import RoomCard from './RoomCard.vue';
+
 export default {
   name: 'App',
   data(){
@@ -65,7 +64,8 @@ export default {
   },
   components: {
     DiscountBanner : DiscountBanner,
-    ModalPage : ModalPage
+    ModalPage : ModalPage,
+    RoomCard : RoomCard,
     // 오른쪽은 내가 import한 파일 작명한 이름
     // 왼쪽은 내가 어떻게 작명을 하겠다.
   }
