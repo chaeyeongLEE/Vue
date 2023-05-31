@@ -10,11 +10,11 @@
   </div>
 
 <NewContainer :post="post" />
-
+<button @click="more">더보기</button>
   <div class="footer">
     <ul class="footer-button-plus">
       <input type="file" id="file" class="inputfile" />
-      <label for="file" class="input-plus">+</label>
+      <label for="file" class="input-plus"> + </label>
     </ul>
   </div>
 </template>
@@ -22,6 +22,8 @@
 <script>
 import NewContainer from "@/components/NewContainer.vue";
 import insta from "../src/assets/insta";
+import axios from "axios";
+axios.post();
 export default {
   name: 'App',
   data(){
@@ -32,7 +34,18 @@ export default {
   },
   components: {
     NewContainer : NewContainer
-  }
+  },
+  methods : {
+    more(){
+      axios.get('https://codingapple1.github.io/vue/more1.json')
+          .then((결과)=>{
+            //요청성공 시 실행할 코드
+        console.log(결과.data);
+        this.post.push(결과.data);
+          })
+    }
+  },
+
 }
 </script>
 
