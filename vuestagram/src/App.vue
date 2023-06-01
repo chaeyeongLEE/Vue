@@ -1,22 +1,32 @@
 <template>
   <div class="header">
     <ul class="header-button-left">
-      <li>Cancel</li>
+      <li v-if="step === 1 || step === 2" @click="step = 0">Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li @click="step++" v-if="step === 1">Next</li>
+      <li v-if="step === 2">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-<NewContainer :post="post" />
-<button @click="more">더보기</button>
-  <div class="footer">
-    <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
-      <label for="file" class="input-plus"> + </label>
-    </ul>
-  </div>
+<NewContainer :post="post" :step="step" :imgUrl="imgUrl"/>
+  <!-- 클릭시 axios를 이용해 받은 데이터를 기존 데이터 배열에 추가하는 함수가 실행됨 -->
+<button class="btn" @click="more" v-if="step === 0">더보기</button>
+
+<div class="footer" v-if="step === 0">
+  <ul class="footer-button-plus">
+    <input @change="uploadImg" type="file" id="file" class="inputfile" />
+    <label for="file" class="input-plus">+</label>
+  </ul>
+</div>
+  <div v-if="step === 0">내용1</div>
+  <div v-if="step === 1">내용2</div>
+  <div v-if="step === 2">내용3</div>
+  <button @click="step=0">Button1</button>
+  <button @click="step=1">Button2</button>
+  <button @click="step=2">Button3</button>
+
 </template>
 
 <script>
@@ -28,7 +38,10 @@ export default {
   name: 'App',
   data(){
     return {
-      post : insta
+      step : 0, //초기값 설정
+      post : insta,
+      더보기 : 0,
+      imgUrl: "",
       // insta라는 이름으로 불러온 데이터를 post라는 이름으로 저장
     }
   },
@@ -36,14 +49,27 @@ export default {
     NewContainer : NewContainer
   },
   methods : {
+    // 버튼을 눌렀을 때, 실행할 함수에서 axios를 이용해 GET방식으로 데이터를 와서..
     more(){
       axios.get('https://codingapple1.github.io/vue/more1.json')
-          .then((결과)=>{
+          .then((result)=>{
             //요청성공 시 실행할 코드
-        console.log(결과.data);
-        this.post.push(결과.data);
+        console.log(result.data);
+            // 글목록 데이터(insta.js)에 GET받은 데이터(result)를 추가하면..
+        this.post.push(result.data);
+        this.더보기++;
           })
-    }
+          .catch(()=>{
+            console.log("Get요청을 실패했습니다.")
+          });
+    },
+    uploadImg(e) {
+      let file = e.target.files;
+      let url = URL.createObjectURL(file[0]);
+      this.imgUrl = url;
+      this.step++;
+    },
+
   },
 
 }
