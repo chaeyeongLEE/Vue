@@ -25,15 +25,15 @@ const routes = [
             path : '/jobs',
             component: JobsView,
         },
-    {
-        path: '/user',
-        component: UserView,
-    },
-    {
-        path: '/item',
-        component: ItemView,
-    }
-    ];
+        {
+            path: '/user',
+            component: UserView,
+        },
+        {
+            path: '/item',
+            component: ItemView,
+        }
+        ];
 const router = createRouter({
     history: createWebHistory(), routes
 });

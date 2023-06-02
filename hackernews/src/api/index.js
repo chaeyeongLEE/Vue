@@ -10,7 +10,14 @@ function fetchNewsList() {
     return  axios.get(`${config.baseUrl}news/1.json`);
     // return  axios.get(config.baseurl + 'news/1.json')과도 동일함
 }
+function fetchJobsList() {
+    return axios.get(`${config.baseUrl}jobs/1.json`);
+}
+function fetchAskList() {
+    return axios.get(`${config.baseUrl}ask/1.json`);
+}
+
 
 export {
-    fetchNewsList
+    fetchNewsList, fetchJobsList, fetchAskList
 }
