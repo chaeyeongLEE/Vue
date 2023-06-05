@@ -4,6 +4,8 @@ import JobsView from "../views/JobsView.vue";
 //import {createRouter, createWebHistory} from 'vue-router';
 import Vue from "vue";
 import VueRouter from 'vue-router';
+import userView from "@/views/UserView.vue";
+import ItemView from "@/views/ItemView.vue";
 
 
 Vue.use(VueRouter);
@@ -30,7 +32,14 @@ export const router = new VueRouter({
             path : '/jobs',
             component: JobsView,
         },
-
+        {
+            path : '/user/:id',
+            component: userView,
+        },
+        {
+            path: '/ask/:user',
+            component:ItemView,
+        }
         ]});
 
 

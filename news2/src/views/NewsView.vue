@@ -4,7 +4,18 @@
 <!--      {{ user.title }}-->
 <!--    </div>-->
         <div v-for="(user, i) in this.$store.state.news" :key="i">
-          {{ user.title }}
+          <a v-bind:href="user.url">
+            {{ user.title }}
+          </a>
+          <small>
+            {{user.time_ago}} by
+<!--            <router-link v-bind:to="'/user/' + user.user">-->
+<!--              {{user.user}}-->
+<!--            </router-link>-->
+            <router-link v-bind:to="`/user/${user.user}`">
+              {{user.user}}
+            </router-link>
+           </small>
         </div>
   </div>
 </template>
