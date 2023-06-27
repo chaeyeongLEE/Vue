@@ -1,22 +1,20 @@
 <template>
   <div>
-    <p> name : {{userItem.id}}</p>
-    <p> karma : {{userItem.karma}}</p>
-    <p> created : {{userItem.created}}</p>
+
+    <p> {{fetchedItem.title}}</p>
   </div>
 </template>
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name:'ItemView',
   computed:{
-    userItem(){
-      return this.$store.state.user;
-    }
+    ...mapGetters(['fetchedItem'])
   },
   created() {
-    const userItem = this.$route.params.user;
-
-    this.$store.dispatch('FETCH_ITEM', userItem);
+    const itemId = this.$route.params.id;
+    this.$store.dispatch('FETCH_ITEM', itemId);
   }
 }
 </script>
